@@ -4,22 +4,26 @@ export default function addCustomStyle(
   styles: any,
   mediaQuery?: string
 ) {
+
+  //checking whether provided selector exists
   var querySelector = document.body.querySelector(selector);
+  //checking whether id is unique and not null
   var isUniqueId =
     styleidentifier !== "" && document.getElementById(styleidentifier) === null;
+  //checking whether there is mediaquery and it matches regex
   var isCorrectMediaQuery = mediaQuery
     ? mediaQuery.match(/\d*(min-width|max-width):\s*(\d+\s?)(px)/g) !== null
     : true;
 
   if (querySelector && isUniqueId && isCorrectMediaQuery) {
-    console.log(mediaQuery);
+
     let finalCss =
       mediaQuery === undefined
         ? selector + styles
         : "@media (" + mediaQuery + ") {" + selector + styles + "}";
 
-    console.log(finalCss);
 
+    //creating style tag with given id and inserting it to head
     var css = document.createElement("style");
     css.type = "text/css";
     css.setAttribute("id", styleidentifier);
@@ -29,4 +33,3 @@ export default function addCustomStyle(
   }
 }
 
-/* Set the style */
