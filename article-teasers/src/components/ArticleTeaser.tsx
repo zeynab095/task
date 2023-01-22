@@ -9,9 +9,9 @@ const ImageContainer = ({ text }: { text: string }) => {
 };
 
 export default function ArticleTeaser() {
-  const [data, setData] = useState<string | undefined>("a");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [data, setData] = useState<string | undefined>(undefined);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,21 +32,19 @@ export default function ArticleTeaser() {
 
   return (
     <li className="article-teaser">
-      <div className="centerContainer">
-        {error && <ImageContainer text={error} />}
+      {error && <ImageContainer text={error} />}
 
-        {loading && <ImageContainer text={"Loading..."} />}
+      {loading && <ImageContainer text={"Loading..."} />}
 
-        {!error && !loading && (
-          <img
-            src={data}
-            alt=""
-            width="200px"
-            height="200px"
-            onError={() => setError("Image address is not availave")}
-          />
-        )}
-      </div>
+      {!error && !loading && (
+        <img
+          src={data}
+          alt=""
+          width="200"
+          height="200"
+          onError={() => setError("Image address is not availave")}
+        />
+      )}
     </li>
   );
 }
