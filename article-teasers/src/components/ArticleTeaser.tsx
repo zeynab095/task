@@ -15,7 +15,7 @@ export default function ArticleTeaser() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch("https://dog.ceo/api/breeds/image/random");
+      const response = await fetch("https://dog.ceo/api/breeds/imae/random");
 
       const data = await response.json();
       setData(data.message);
@@ -23,7 +23,8 @@ export default function ArticleTeaser() {
 
     fetchData()
       .catch((e) => {
-        setError(e);
+        console.log(e)
+        setError("Error occured while fetching");
       })
       .finally(() => {
         setLoading(false);
